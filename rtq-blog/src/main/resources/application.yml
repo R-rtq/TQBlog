@@ -1,6 +1,7 @@
 server:
   port: 7777
 spring:
+#MySQL
   datasource:
     url: jdbc:mysql://localhost:3306/tq_blog?characterEncoding=utf-8&serverTimezone=Asia/Shanghai
     username: root
@@ -20,3 +21,8 @@ spring:
           logic-delete-value: 1
           logic-not-delete-value: 0
           id-type: auto
+#Redis
+  redis:
+    host: 47.95.7.116
+    port: 6379
+    password: 1128

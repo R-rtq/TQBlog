@@ -9,6 +9,7 @@ import org.springframework.data.redis.serializer.StringRedisSerializer;
 @Configuration
 public class RedisConfig {
 
+
     @Bean
     @SuppressWarnings(value = { "unchecked", "rawtypes" })
     public RedisTemplate<Object, Object> redisTemplate(RedisConnectionFactory connectionFactory)
