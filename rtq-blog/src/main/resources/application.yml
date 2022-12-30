@@ -26,3 +26,7 @@ spring:
     host: 47.95.7.116
     port: 6379
     password: 1128
+oss:
+  accessKey: uR5yYWcAzQIXYHZ20xUAQKK-NyV39tFj3pFYSzCn
+  secretKey:
+  bucket: tq-blog

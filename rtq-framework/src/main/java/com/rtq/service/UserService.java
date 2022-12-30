@@ -1,6 +1,7 @@
 package com.rtq.service;
 
 import com.baomidou.mybatisplus.extension.service.IService;
+import com.rtq.domain.ResponseResult;
 import com.rtq.domain.entity.User;
 
 
@@ -12,4 +13,5 @@ import com.rtq.domain.entity.User;
  */
 public interface UserService extends IService<User> {
 
+    ResponseResult userInfo();
 }
