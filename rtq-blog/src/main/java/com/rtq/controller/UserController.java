@@ -16,12 +16,18 @@ public class UserController {
     @Autowired
     private UserService userService;
 
+    //点击个人中心，自动获取user信息
     @GetMapping("/userInfo")
     public ResponseResult userInfo(){
         return userService.userInfo();
     }
+    //修改用户信息点击保存后更新到数据库
     @PutMapping("/userInfo")
     public ResponseResult updateUserInfo(@RequestBody User user){
         return userService.updateUserInfo(user);
+    }
+    @PostMapping("/register")
+    public ResponseResult register(@RequestBody User user){
+        return userService.register(user);
     }
 }
