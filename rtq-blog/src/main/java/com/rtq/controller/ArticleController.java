@@ -1,5 +1,6 @@
 package com.rtq.controller;
 
+import com.rtq.annotation.SystemLog;
 import com.rtq.domain.ResponseResult;
 import com.rtq.domain.entity.Article;
 import com.rtq.service.ArticleService;
@@ -40,4 +41,9 @@ public class ArticleController {
         return articleService.getArticleDetail(id);
     }
 
+    @PutMapping("/updateViewCount/{id}")
+    @SystemLog(businessName="更新帖子访问量")
+    public ResponseResult updateViewCount(@PathVariable("id") Long id){
+        return articleService.updateViewCount(id);
+    }
 }

@@ -15,12 +15,14 @@ import com.rtq.mapper.ArticleMapper;
 import com.rtq.service.ArticleService;
 import com.rtq.service.CategoryService;
 import com.rtq.utils.BeanCopyUtils;
+import com.rtq.utils.RedisCache;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 import java.util.Objects;
 
 /**
@@ -32,13 +34,16 @@ public class ArticleServiceImpl extends ServiceImpl<ArticleMapper, Article> impl
 
     @Autowired
     private CategoryService categoryService;
-
+    @Autowired
+    private RedisCache redisCache;
     @Override
     public ResponseResult hotArticleList() {
         //查询热门文章，封装成ResponseResult返回
         LambdaQueryWrapper<Article> queryWrapper=new LambdaQueryWrapper<>();
         //必须是正式文章
-        queryWrapper.eq(Article::getStatus, SystemConstants.ARTICLE_STATUS_NORMAL);
+         queryWrapper.eq(Article::getStatus, SystemConstants.ARTICLE_STATUS_NORMAL);
+        //Map<String, Object> cacheMap = redisCache.getCacheMap("Article:ViewCount");
+
         //按照浏览量进行排序
         queryWrapper.orderByDesc(Article::getViewCount);
         //最多只查询10条
@@ -97,6 +102,8 @@ public class ArticleServiceImpl extends ServiceImpl<ArticleMapper, Article> impl
     public ResponseResult getArticleDetail(Long id) {
         //根据id查询文章
         Article article = getById(id);
+        Integer viewCount = redisCache.getCacheMapValue("Article:ViewCount", id.toString());
+        article.setViewCount(viewCount.longValue());
         //转化成Vo
         ArticleDetailVo articleDetailVo = BeanCopyUtils.copyBean(article, ArticleDetailVo.class);
 
@@ -111,5 +118,12 @@ public class ArticleServiceImpl extends ServiceImpl<ArticleMapper, Article> impl
 
         return ResponseResult.okResult(articleDetailVo);
 
+    }
+
+    @Override
+    public ResponseResult updateViewCount(Long id) {
+        redisCache.incrementCacheMapValue("Article:ViewCount",id.toString(),1);
+
+        return ResponseResult.okResult();
     }
 }
