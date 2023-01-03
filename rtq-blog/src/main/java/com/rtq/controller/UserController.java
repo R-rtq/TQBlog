@@ -1,5 +1,6 @@
 package com.rtq.controller;
 
+import com.rtq.annotation.SystemLog;
 import com.rtq.domain.ResponseResult;
 import com.rtq.domain.entity.User;
 import com.rtq.service.UserService;
@@ -23,6 +24,7 @@ public class UserController {
     }
     //修改用户信息点击保存后更新到数据库
     @PutMapping("/userInfo")
+    @SystemLog(businessName="更新用户信息")
     public ResponseResult updateUserInfo(@RequestBody User user){
         return userService.updateUserInfo(user);
     }
