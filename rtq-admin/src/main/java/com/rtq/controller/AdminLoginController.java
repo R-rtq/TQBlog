@@ -1,14 +1,16 @@
 package com.rtq.controller;
 
+import com.rtq.annotation.SystemLog;
 import com.rtq.domain.ResponseResult;
-import com.rtq.domain.entity.AdminUserInfoVo;
+import com.rtq.domain.entity.Menu;
+import com.rtq.domain.vo.AdminUserInfoVo;
 import com.rtq.domain.entity.LoginUser;
 import com.rtq.domain.entity.User;
+import com.rtq.domain.vo.RoutersVo;
 import com.rtq.domain.vo.UserInfoVo;
 import com.rtq.enums.AppHttpCodeEnum;
 import com.rtq.exception.SystemException;
 import com.rtq.service.AdminLoginService;
-import com.rtq.service.BlogLoginService;
 import com.rtq.service.MenuService;
 import com.rtq.service.RoleService;
 import com.rtq.utils.BeanCopyUtils;
@@ -36,6 +38,7 @@ public class AdminLoginController {
     @Autowired
     private RoleService roleService;
 
+    @SystemLog(businessName = "用户登录")
     @PostMapping("/user/login")
     public ResponseResult login(@RequestBody User user){
 
@@ -47,6 +50,7 @@ public class AdminLoginController {
 
     }
     @GetMapping("/getInfo")
+    @SystemLog(businessName = "获取用户权限信息，父菜单")
     public ResponseResult<AdminUserInfoVo> getInfo(){
         //获取当前登录的用户
         LoginUser loginUser = SecurityUtils.getLoginUser();
@@ -62,6 +66,22 @@ public class AdminLoginController {
         AdminUserInfoVo adminUserInfoVo=new AdminUserInfoVo(perms,roleKeyList,userInfoVo);
         return ResponseResult.okResult(adminUserInfoVo);
 
+    }
+
+    @SystemLog(businessName = "获取用户子菜单")
+    @GetMapping("/getRouters")
+    public ResponseResult<RoutersVo> getRouters(){
+        Long userId = SecurityUtils.getUserId();
+        //查询menu 结果是tree的形式
+        List<Menu> menus = menuService.selectRouterMenuTreeByUserId(userId);
+        //封装数据返回
+        return ResponseResult.okResult(new RoutersVo(menus));
+    }
+
+    @SystemLog(businessName = "用户退出")
+    @PostMapping("/user/logout")
+    public ResponseResult logout(){
+        return adminLoginService.logout();
     }
 
 

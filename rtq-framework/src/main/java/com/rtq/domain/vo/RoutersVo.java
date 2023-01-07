@@ -1,6 +1,6 @@
-package com.rtq.domain.entity;
+package com.rtq.domain.vo;
 
-import com.rtq.domain.vo.UserInfoVo;
+import com.rtq.domain.entity.Menu;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -16,10 +16,8 @@ import java.util.List;
 @Accessors(chain = true)
 @AllArgsConstructor
 @NoArgsConstructor
-public class AdminUserInfoVo {
-    private List<String> permissions;
+public class RoutersVo {
 
-    private List<String> roles;
+    private List<Menu> menus;
 
-    private UserInfoVo userInfoVo;
 }
