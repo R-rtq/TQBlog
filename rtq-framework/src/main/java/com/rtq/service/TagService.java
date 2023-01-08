@@ -1,7 +1,10 @@
 package com.rtq.service;
 
 import com.baomidou.mybatisplus.extension.service.IService;
+import com.rtq.domain.ResponseResult;
+import com.rtq.domain.dto.TagListDto;
 import com.rtq.domain.entity.Tag;
+import com.rtq.domain.vo.PageVo;
 
 
 /**
@@ -12,4 +15,9 @@ import com.rtq.domain.entity.Tag;
  */
 public interface TagService extends IService<Tag> {
 
+    ResponseResult<PageVo> pageTagList(Integer pageNum, Integer pageSize, TagListDto tagListDto);
+
+    ResponseResult addTag(TagListDto tagListDto);
+
+    ResponseResult delTag(Long id);
 }
