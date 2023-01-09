@@ -3,8 +3,9 @@ package com.rtq.service;
 import com.baomidou.mybatisplus.extension.service.IService;
 import com.rtq.domain.ResponseResult;
 import com.rtq.domain.entity.Category;
+import com.rtq.domain.vo.CategoryVo;
 
-
+import java.util.List;
 
 
 /**
@@ -17,4 +18,5 @@ public interface CategoryService extends IService<Category> {
 
     ResponseResult getCategoryList();
 
+    List<CategoryVo> listAllCategory();
 }

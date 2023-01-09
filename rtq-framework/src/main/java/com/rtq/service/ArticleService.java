@@ -2,6 +2,7 @@ package com.rtq.service;
 
 import com.baomidou.mybatisplus.extension.service.IService;
 import com.rtq.domain.ResponseResult;
+import com.rtq.domain.dto.AddArticleDto;
 import com.rtq.domain.entity.Article;
 
 /**
@@ -16,4 +17,6 @@ public interface ArticleService extends IService<Article> {
     ResponseResult getArticleDetail(Long id);
 
     ResponseResult updateViewCount(Long id);
+
+    ResponseResult add(AddArticleDto articleDto);
 }

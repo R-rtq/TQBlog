@@ -5,6 +5,10 @@ import com.rtq.domain.ResponseResult;
 import com.rtq.domain.dto.TagListDto;
 import com.rtq.domain.entity.Tag;
 import com.rtq.domain.vo.PageVo;
+import com.rtq.domain.vo.TagVo;
+import com.rtq.domain.vo.TagVo2;
+
+import java.util.List;
 
 
 /**
@@ -20,4 +24,6 @@ public interface TagService extends IService<Tag> {
     ResponseResult addTag(TagListDto tagListDto);
 
     ResponseResult delTag(Long id);
+
+    List<TagVo2> listAllTag();
 }

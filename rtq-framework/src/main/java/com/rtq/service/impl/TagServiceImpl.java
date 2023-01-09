@@ -9,6 +9,7 @@ import com.rtq.domain.entity.LoginUser;
 import com.rtq.domain.entity.Tag;
 import com.rtq.domain.vo.PageVo;
 import com.rtq.domain.vo.TagVo;
+import com.rtq.domain.vo.TagVo2;
 import com.rtq.enums.AppHttpCodeEnum;
 import com.rtq.exception.SystemException;
 import com.rtq.mapper.TagMapper;
@@ -73,4 +74,14 @@ public class TagServiceImpl extends ServiceImpl<TagMapper, Tag> implements TagSe
         removeById(id);
         return ResponseResult.okResult();
     }
+
+    @Override
+    public List<TagVo2> listAllTag() {
+        LambdaQueryWrapper<Tag> wrapper = new LambdaQueryWrapper<>();
+        wrapper.select(Tag::getId,Tag::getName);
+        List<Tag> list = list(wrapper);
+        List<TagVo2> tagVos = BeanCopyUtils.copyBeanList(list, TagVo2.class);
+        return tagVos;
+    }
+
 }

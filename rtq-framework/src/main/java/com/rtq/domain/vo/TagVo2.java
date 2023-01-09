@@ -6,13 +6,20 @@ import lombok.NoArgsConstructor;
 
 /**
  * @author rtq
- * @Date 2023/1/7
+ * @Date 2023/1/8
  **/
 @Data
-@NoArgsConstructor
 @AllArgsConstructor
-public class TagVo {
+@NoArgsConstructor
+public class TagVo2 {
 
-    private String name;
-    private String remark;
+
+        private Long id;
+
+        //标签名
+        private String name;
+
+
+
+
 }
