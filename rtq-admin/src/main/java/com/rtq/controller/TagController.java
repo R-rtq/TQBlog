@@ -12,6 +12,7 @@ import com.rtq.service.TagService;
 import com.rtq.utils.BeanCopyUtils;
 import com.rtq.utils.SecurityUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.Date;
@@ -63,6 +64,7 @@ public class TagController {
         return ResponseResult.okResult(tag);
     }
 
+    //@PreAuthorize()
     @SystemLog(businessName = "写文章时获取所选标签")
     @GetMapping("/listAllTag")
     public ResponseResult listAllTag(){
