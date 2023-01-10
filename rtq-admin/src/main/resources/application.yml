@@ -30,5 +30,5 @@ mybatis-plus:
 
 oss:
   accessKey: uR5yYWcAzQIXYHZ20xUAQKK-NyV39tFj3pFYSzCn
-  secretKey: 085sa1f7h25rQfqywKbTHD3ZXcaw5Xv1rNBi5yw0
+  secretKey: 
   bucket: tq-blog
